@@ -11,7 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DynamicFormComponent implements OnInit {
 
-  @Input questions: QuestionBase<any>[] = [];
+  @Input() questions: QuestionBase<any>[] = [];
   form: FormGroup;
   payLoad = '';
 
