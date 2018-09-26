@@ -1,16 +1,16 @@
-<div [formGroup]="form">
-  <label [attr.for]="question.key">{{question.label}}</label>
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
-  <div [ngSwitch]="question.controlType">
+    <div *ngFor="let question of questions" class="form-row">
+      <app-question [question]="question" [form]="form"></app-question>
+    </div>
 
-    <input *ngSwitchCase="'textbox'" [formControlName]="question.key"
-            [id]="question.key" [type]="question.type">
+    <div class="form-row">
+      <button type="submit" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
 
-    <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
-      <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
-    </select>
-
-  </div> 
-
-  <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
+  <div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong><br>{{payLoad}}
+  </div>
 </div>
